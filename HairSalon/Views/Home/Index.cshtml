@@ -1,0 +1,30 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class="w3-container w3-center">
+  <div class="w3-container" "w3-center">
+    @if (@Model.Count == 0)
+    {
+      <h3>No Stylists</h3>
+      <p><a href="/stylists/new">Add Stylist</a></p>
+    }
+
+    @if (@Model.Count > 0)
+    {
+      <div class="w3-container">
+        <h2>Sty.List</h2>
+
+        @foreach(var stylist in Model)
+        {
+          <li>@stylist.GetStylistName()</li>
+        }
+      </div>
+      <p><a href="/stylists/new">Add Stylist</a></p>
+      <form action="/stylists/delete" method="post">
+        <button type="submit" name="button">Delete All Stylists</button>
+      </form>
+    }
+
+  </div>
+</div>
