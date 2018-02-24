@@ -16,9 +16,9 @@ Hair Salon: keep track of your stylists and their clients
     id: 1
     Stylist: Kim Johnson
 
-* Once the Stylist is created, take employee input to enter a client via a form on the Stylist's page.
-  Clients can only be entered on a Stylist's summary page.
-  - example input (while on Kim Johnson's Stylist Page): "Client Von Clientele"
+* Once the Stylist is created, take employee input to enter a client via a form on the Stylist's client creation page.
+  Clients can only be entered on a Stylist's client creation page.
+  - example input: "Client Von Clientele"
   - example output: "Client Von Clientele"
 
   - example input: "Yu Zerbase"
@@ -50,7 +50,7 @@ Hair Salon: keep track of your stylists and their clients
     Client: "Marsha Martia-Martsché"
     Stylist: 2    
 
-* Stylist List page will have the following links:
+* Stylist List page will have the following Stylists and associated links:
   - "Kim Johnson"
   - "John Johns"
 
@@ -60,6 +60,11 @@ Hair Salon: keep track of your stylists and their clients
 
 * Clicking on "John Johns" will show the correlated client list:
   - "Marsha Martia-Martsché"
+
+* User can access list of all Clients via a link on the HairSalon summary page and see their associated Stylists:
+  - example display:
+   Clients: "Client Von Clientele", "Yu Zerbase", "Marsha Martia-Martsché"
+   Stylists: "Kim Johnson", "Kim Johnson", "John Johns"
 
 ## Setup/Installation Requirements
 
