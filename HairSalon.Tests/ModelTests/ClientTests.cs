@@ -137,9 +137,8 @@ namespace HairSalon.Tests
       newClient.Save();
       Client newClient2 = new Client("Wu", 1);
       newClient2.Save();
-      List<Client> clientList = new List<Client>{newClient, newClient2};
       //Act
-      string foundStylist = newClient.GimmeTheName(clientList);
+      string foundStylist = newClient.GimmeTheName(newClient);
       Console.WriteLine(foundStylist);
       //Assert
       Assert.AreEqual("Kim", foundStylist);
