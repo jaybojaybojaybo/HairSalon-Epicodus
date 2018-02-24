@@ -127,7 +127,21 @@ namespace HairSalon.Tests
 
       //Assert
       CollectionAssert.AreEqual(testClients, resultClients);
+    }
 
+    [TestMethod]
+    public void ToDictionary_DictioarySaves_Dictionary()
+    {
+      //Arrange
+      Stylist kim = new Stylist("Kim");
+      kim.Save();
+
+      //Act
+      kim.ToDictionary(kim);
+      string kimName = kim.GetStylers(kim.GetId());
+
+      //Assert
+      Assert.AreEqual("Kim", kimName);
     }
   }
 }

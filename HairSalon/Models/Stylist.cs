@@ -10,11 +10,14 @@ namespace HairSalon.Models
     private int _id;
     private string _stylistName;
 
+    public Dictionary<int, string> _Stylers = new Dictionary<int, string>{};
+
     public Stylist(string stylistName, int Id = 0)
     {
       _id = Id;
       _stylistName = stylistName;
     }
+
     public void SetStylistName(string stylistName)
 
     {
@@ -67,19 +70,29 @@ namespace HairSalon.Models
       var cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"INSERT INTO stylists (stylistName) VALUES (@stylistName);";
 
-     MySqlParameter stylistName = new MySqlParameter();
-     stylistName.ParameterName = "@stylistName";
-     stylistName.Value = this._stylistName;
-     cmd.Parameters.Add(stylistName);
+      MySqlParameter stylistName = new MySqlParameter();
+      stylistName.ParameterName = "@stylistName";
+      stylistName.Value = this._stylistName;
+      cmd.Parameters.Add(stylistName);
 
-     cmd.ExecuteNonQuery();
-     _id = (int) cmd.LastInsertedId;
+      cmd.ExecuteNonQuery();
+      _id = (int) cmd.LastInsertedId;
 
       conn.Close();
       if (conn != null)
       {
         conn.Dispose();
       }
+    }
+
+    public void ToDictionary(Stylist stylist)
+    {
+      _Stylers.Add(stylist.GetId(), stylist.GetStylistName());
+    }
+
+    public string GetStylers(int key)
+    {
+      return _Stylers[key];
     }
 
     public static void DeleteAll()

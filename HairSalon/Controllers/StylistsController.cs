@@ -20,6 +20,7 @@ namespace HairSalon.Controllers
         string newName = Request.Form["new-name"];
         Stylist newStylist = new Stylist(newName);
         newStylist.Save();
+        newStylist.ToDictionary(newStylist);
 
         List<Stylist> allStylists = Stylist.GetAll();
         return RedirectToAction("Index", "Home");
@@ -36,9 +37,7 @@ namespace HairSalon.Controllers
       public ActionResult Profile(int id)
       {
         Stylist thisStylist = Stylist.Find(id);
-        List<Client> stylistClientList = thisStylist.GetClients();
-
-        return View(stylistClientList);
+        return View(thisStylist);
       }
 
 

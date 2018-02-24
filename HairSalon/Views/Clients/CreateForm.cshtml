@@ -2,21 +2,15 @@
   Layout = "_Layout";
 }
 
-<!--
-Stylist's unique Model being sent to this page
--->
-
-<div class="w3-container w3-middle">
-  <div class="w3-container" align="center">
-    <h1>Hair Salon</h1>
-    <br>
-    <h2>Enter client for @Model.GimmeTheName()</h2>
-    <form action="/stylists/{id}/clients/new" method="post">
+<div class="w3-container w3-center">
+  <div class="w3-container w3-center">
+    <h2>Enter client for @Model.GetStylistName() </h2>
+    <form action="/stylists/@Model.GetId()/clients/new" method="post">
       <label for="new-client-name">Enter Client's Name:</label>
       <input id="new-client-name" name="new-client-name" type="text">
-      @* <div hidden> *@
+      <div hidden>
       <input type="radio" id="stylist-id" name="stylist-id" value="@Model.GetId()" checked="true" >
-      @* </div> *@
+      </div>
       <button type="submit">Save Client</button>
     </form>
     <br>

@@ -18,7 +18,8 @@ namespace HairSalon.Controllers
       public ActionResult CreateForm(int id)
       {
         Stylist thisStylist = Stylist.Find(id);
-        Console.WriteLine(thisStylist.GetStylistName());
+        string thisName = thisStylist.GetStylistName();
+        int thisId = thisStylist.GetId();
         return View(thisStylist);
       }
 
@@ -26,14 +27,16 @@ namespace HairSalon.Controllers
       public ActionResult Create(int id)
       {
         Stylist thisStylist = Stylist.Find(id);
+        string thisName = thisStylist.GetStylistName();
+        int thisId = thisStylist.GetId();
+
+
         string newClientName = Request.Form["new-client-name"];
         int newStylistId = thisStylist.GetId();
-
         Client newClient = new Client(newClientName, newStylistId);
         newClient.Save();
 
-        List<Client> stylistClientList = thisStylist.GetClients();
-        return RedirectToAction("Index", "Home");
+        return View("~/Views/Stylists/Profile.cshtml", thisStylist);
       }
     }
 }

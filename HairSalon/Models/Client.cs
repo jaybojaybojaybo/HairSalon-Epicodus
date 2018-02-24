@@ -226,10 +226,9 @@ namespace HairSalon.Models
       return foundStylist;
     }
 
-    public string GimmeTheName(List<Client> ClientList)
+    public string GimmeTheName(Client clientele)
     {
-      Client findClient = ClientList[0];
-      int clientSearchId = findClient.GetStylistId();
+      int clientSearchId = clientele.GetStylistId();
 
       MySqlConnection conn = DB.Connection();
       conn.Open();
@@ -254,7 +253,6 @@ namespace HairSalon.Models
       }
 
       Stylist foundStylist = new Stylist(stylistName, stylistId);
-      Console.WriteLine(foundStylist.GetStylistName());
 
        conn.Close();
        if (conn != null)
