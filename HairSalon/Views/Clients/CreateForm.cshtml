@@ -1,0 +1,25 @@
+@{
+  Layout = "_Layout";
+}
+
+<!--
+Stylist's unique Model being sent to this page
+-->
+
+<div class="w3-container w3-middle">
+  <div class="w3-container" align="center">
+    <h1>Hair Salon</h1>
+    <br>
+    <h2>Enter client for @Model.GimmeTheName()</h2>
+    <form action="/stylists/{id}/clients/new" method="post">
+      <label for="new-client-name">Enter Client's Name:</label>
+      <input id="new-client-name" name="new-client-name" type="text">
+      @* <div hidden> *@
+      <input type="radio" id="stylist-id" name="stylist-id" value="@Model.GetId()" checked="true" >
+      @* </div> *@
+      <button type="submit">Save Client</button>
+    </form>
+    <br>
+    <p><a href="/">Back to Hair Salon.</a></p>
+  </div>
+</div>

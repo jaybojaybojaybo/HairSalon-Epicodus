@@ -1,0 +1,31 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class="w3-container w3-center">
+  <div class="w3-container" "w3-center">
+    <h2>
+      @{
+        var clientList = @Model;
+        var firstclient = clientList.First();
+        var newStylist = firstclient.GimmeTheName();
+        <p>@newStylist</p>
+      }
+      's Clients</h2>
+      @if(@Model.Count == 0)
+      {
+        <div class="w3-container">
+          <p><a href="/stylists/{id}/clients/new">Add Clients</a></p>
+        </div>
+      }
+      @if(@Model.Count > 0)
+      {
+        @foreach(var client in @Model)
+        {
+          <li>@client.GetClientName()</li>
+        }
+        <p><a href="/stylists/{id}/clients/new">Make New Contact</a></p>
+      }
+      <p><a href="/">Back to Hair Salon.</a></p>
+  </div>
+</div>

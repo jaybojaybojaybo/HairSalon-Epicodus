@@ -2,6 +2,9 @@
   Layout = "_Layout";
 }
 
+<!--
+Stylist Model being sent to this page
+-->
 <div class="w3-container w3-center">
   <div class="w3-container" "w3-center">
     @if (@Model.Count == 0)
@@ -13,16 +16,17 @@
     @if (@Model.Count > 0)
     {
       <div class="w3-container">
-        <h2>Sty.List</h2>
+        <h2>Stylists</h2>
 
         @foreach(var stylist in Model)
         {
-          <li>@stylist.GetStylistName()</li>
+          <li><a href="/stylists/@stylist.GetId()/profile">@stylist.GetStylistName()</a></li>
         }
       </div>
       <p><a href="/stylists/new">Add Stylist</a></p>
+      <p><a href="/clients">See Clients</a></p>
       <form action="/stylists/delete" method="post">
-        <button type="submit" name="button">Delete All Stylists</button>
+        <button type="submit" name="button">Delete All Stylists and their Clients</button>
       </form>
     }
 

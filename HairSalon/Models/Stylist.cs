@@ -15,8 +15,8 @@ namespace HairSalon.Models
       _id = Id;
       _stylistName = stylistName;
     }
-
     public void SetStylistName(string stylistName)
+
     {
       _stylistName = stylistName;
     }
@@ -84,13 +84,16 @@ namespace HairSalon.Models
 
     public static void DeleteAll()
     {
-    MySqlConnection conn = DB.Connection();
+     MySqlConnection conn = DB.Connection();
      conn.Open();
 
-     var cmd = conn.CreateCommand() as MySqlCommand;
-     cmd.CommandText = @"TRUNCATE TABLE stylists;";
+     var cmd1 = conn.CreateCommand() as MySqlCommand;
+     cmd1.CommandText = @"TRUNCATE TABLE stylists;";
+     cmd1.ExecuteNonQuery();
 
-     cmd.ExecuteNonQuery();
+     var cmd2 = conn.CreateCommand() as MySqlCommand;
+     cmd2.CommandText = @"TRUNCATE TABLE clients;";
+     cmd2.ExecuteNonQuery();
 
      conn.Close();
      if (conn != null)
@@ -152,6 +155,38 @@ namespace HairSalon.Models
       }
 
      return foundStylist;
+    }
+
+    public List<Client> GetClients()
+    {
+      List<Client> allStylistClients = new List<Client> {};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM clients WHERE stylist_id = @searchStylistId;";
+
+      MySqlParameter searchStylistId = new MySqlParameter();
+      searchStylistId.ParameterName = "@searchStylistId";
+      searchStylistId.Value = this._id;
+      cmd.Parameters.Add(searchStylistId);
+
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int clientId = rdr.GetInt32(0);
+        string clientName = rdr.GetString(1);
+        int stylistId = rdr.GetInt32(2);
+        Client newClient = new Client(clientName, stylistId, clientId);
+        allStylistClients.Add(newClient);
+      }
+
+      conn.Close();
+      if (conn != null)
+      {
+          conn.Dispose();
+      }
+      return allStylistClients;
     }
   }
 }

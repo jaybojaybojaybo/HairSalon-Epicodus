@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using HairSalon.Models;
+using System;
 
 namespace HairSalon.Controllers
 {
@@ -21,14 +22,25 @@ namespace HairSalon.Controllers
         newStylist.Save();
 
         List<Stylist> allStylists = Stylist.GetAll();
-        return View("~/Views/Home/Index.cshtml", allStylists);
+        return RedirectToAction("Index", "Home");
       }
 
       [HttpPost("/stylists/delete")]
-        public ActionResult DeleteAll()
-        {
-          Stylist.DeleteAll();
-          return View();
-        }
+      public ActionResult DeleteAll()
+      {
+        Stylist.DeleteAll();
+        return View();
+      }
+
+      [HttpGet("/stylists/{id}/profile")]
+      public ActionResult Profile(int id)
+      {
+        Stylist thisStylist = Stylist.Find(id);
+        List<Client> stylistClientList = thisStylist.GetClients();
+
+        return View(stylistClientList);
+      }
+
+
     }
 }

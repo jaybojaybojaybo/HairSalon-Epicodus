@@ -29,7 +29,7 @@ namespace HairSalon.Tests
     }
 
     [TestMethod]
-    public void Save_SavesStylistToDatabase_ItemList()
+    public void Save_SavesStylistToDatabase_StylistList()
     {
       //Arrange
       string stylistName = "Kim";
@@ -105,9 +105,29 @@ namespace HairSalon.Tests
 
       //Act
       Stylist foundStylist = Stylist.Find(newStylist.GetId());
-      
+
       //Assert
       Assert.AreEqual(true, newStylist.Equals(foundStylist));
+    }
+
+    [TestMethod]
+    public void GetClients_ReturnsListofClientsByStylist_ClientList()
+    {
+      //Arrange
+      Stylist newStylist = new Stylist("Kim");
+      newStylist.Save();
+      Client newClient = new Client("Yu", newStylist.GetId());
+      newClient.Save();
+      Client newClient2 = new Client("Wu", newStylist.GetId());
+      newClient2.Save();
+      List<Client> testClients = new List<Client> {newClient, newClient2};
+
+      //Act
+      List<Client> resultClients = newStylist.GetClients();
+
+      //Assert
+      CollectionAssert.AreEqual(testClients, resultClients);
+
     }
   }
 }
