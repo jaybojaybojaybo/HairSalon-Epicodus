@@ -4,20 +4,28 @@
 
 <div class="w3-container w3-center">
   <div class="w3-container" "w3-center">
-    <h2>Client Created!</h2>
     <div "w3-row">
-      <div class="w3-half w3-container" align="right">
+      <div class="w3-third w3-container" align="right">
         <h3>Client</h3>
         @foreach(var client in Model)
         {
           <li>@client.GetClientName()</li>
         }
       </div>
-      <div class="w3-half w3-container" align="left">
+      <div class="w3-third w3-container" align="center">
         <h3>Stylist</h3>
         @foreach(var client in Model)
         {
           <li>@client.GimmeTheName(@client)</li>
+        }
+      </div>
+      <div class="w3-third w3-container" align="left">
+        <h3>Delete</h3>
+        @foreach(var client in Model)
+        {
+          <form action="/clients/@client.GetId()/delete" method="post">
+            <button type="submit" name="button">Delete this Client</button>
+          </form>
         }
       </div>
     </div>

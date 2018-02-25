@@ -38,5 +38,16 @@ namespace HairSalon.Controllers
 
         return View("~/Views/Stylists/Profile.cshtml", thisStylist);
       }
+
+      [HttpPost("/clients/{id}/delete")]
+      public ActionResult Delete(int id)
+      {
+        Client thisClient = Client.Find(id);
+        Stylist thisStylist = thisClient.FindStylist(thisClient.GetStylistId());
+        thisClient.DeleteClient();
+
+        return View(thisStylist);
+      }
+
     }
 }
