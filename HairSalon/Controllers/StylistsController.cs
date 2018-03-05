@@ -45,10 +45,10 @@ namespace HairSalon.Controllers
       public ActionResult Delete(int id)
       {
         Stylist thisStylist = Stylist.Find(id);
-        string deletedStylist = thisStylist.GetStylistName();
+        int deletedStylist = thisStylist.GetId();
         thisStylist.DeleteAllClients();
         thisStylist.DeleteStylist();
-        return View(deletedStylist);
+        return View(thisStylist);
       }
     }
 }

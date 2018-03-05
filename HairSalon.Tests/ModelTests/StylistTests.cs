@@ -138,7 +138,7 @@ namespace HairSalon.Tests
 
       //Act
       kim.ToDictionary(kim);
-      string kimName = kim.GetStylers(kim.GetId());
+      string kimName = kim.GetStyler(kim.GetId());
 
       //Assert
       Assert.AreEqual("Kim", kimName);
