@@ -10,7 +10,7 @@ namespace HairSalon.Models
     private int _id;
     private string _stylistName;
 
-    public Dictionary<int, string> _Stylers = new Dictionary<int, string>{};
+    public Dictionary<int, string> _Styler = new Dictionary<int, string>{};
 
     public Stylist(string stylistName, int Id = 0)
     {
@@ -37,6 +37,16 @@ namespace HairSalon.Models
     public int GetId()
     {
       return _id;
+    }
+
+    public void ToDictionary(Stylist stylist)
+    {
+      _Styler.Add(stylist.GetId(), stylist.GetStylistName());
+    }
+
+    public string GetStyler(int key)
+    {
+      return _Styler[key];
     }
 
     public static List<Stylist> GetAll()
@@ -83,16 +93,6 @@ namespace HairSalon.Models
       {
         conn.Dispose();
       }
-    }
-
-    public void ToDictionary(Stylist stylist)
-    {
-      _Stylers.Add(stylist.GetId(), stylist.GetStylistName());
-    }
-
-    public string GetStylers(int key)
-    {
-      return _Stylers[key];
     }
 
     public static void DeleteAll()
@@ -170,6 +170,28 @@ namespace HairSalon.Models
      return foundStylist;
     }
 
+    public void DeleteStylist()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM stylists WHERE id = @searchId;";
+
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@searchId";
+      searchId.Value = _id;
+      cmd.Parameters.Add(searchId);
+
+      cmd.ExecuteNonQuery();
+
+      conn.Close();
+      if (conn != null)
+      {
+          conn.Dispose();
+      }
+    }
+
     public List<Client> GetClients()
     {
       List<Client> allStylistClients = new List<Client> {};
@@ -200,28 +222,6 @@ namespace HairSalon.Models
           conn.Dispose();
       }
       return allStylistClients;
-    }
-
-    public void DeleteStylist()
-    {
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-
-      var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM stylists WHERE id = @searchId;";
-
-      MySqlParameter searchId = new MySqlParameter();
-      searchId.ParameterName = "@searchId";
-      searchId.Value = _id;
-      cmd.Parameters.Add(searchId);
-
-      cmd.ExecuteNonQuery();
-
-      conn.Close();
-      if (conn != null)
-      {
-          conn.Dispose();
-      }
     }
 
     public void DeleteAllClients()

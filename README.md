@@ -69,10 +69,15 @@ Hair Salon: keep track of your stylists and their clients
 ## Setup/Installation Requirements
 
 * Clone the git repository from 'https://github.com/jaybojaybojaybo/HairSalon-Epicodus'.
+* Navigate to the HairSalon.Tests folder and run the command "dotnet resore".
+* In the HairSalon folder, run the following command: "dotnet add package MySQLConnector"
 * Run the command 'dotnet restore' in the HairSalon folder to download the necessary packages.
-* While still in the WordCounter folder, run the command 'dotnet run' to build and run the server on localhost.
+* Using MAMP, setup database to port 8889.
+* Navigate to myPHPadmin from the MAMP online start page.
+* While in myPHPadmin, select import to import the database - navigate to the Solution folder of the HairSalon project and select the "jasun_feddema" and "jasun_feddema_tests" databases.
+* While in the HairSalon folder, run the command 'dotnet run' to run the app.
 * Use your preferred web browser to navigate to localhost:5000
-* Follow instructions on webpage for the Word Counter experience.
+* Follow instructions on webpage for the HairSalon app experience.
 
 
 ## Support and contact details
@@ -83,6 +88,8 @@ Hair Salon: keep track of your stylists and their clients
 
 * C#
 * Asp .NET Core MVC
+* MAMP
+* MySql
 * HTML
 * CSS
 * Javascript
